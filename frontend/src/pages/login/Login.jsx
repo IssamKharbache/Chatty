@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { loading, login } = useLogin();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(username, password);
+  };
   return (
     <div className="flex flex-col  items-center justify-center min-w-96 mx-auto">
       <div className="w-[350px]  md:w-[500px] p-10  rounded-lg shadow-md bg-gray-700   ">
@@ -10,12 +20,13 @@ export default function Login() {
             Login
           </span>
         </h1>{" "}
-        <form className="flex flex-col ">
+        <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
             <label className="label p-2 "></label>
             <span className="text-xl  label-text font-poppins">Username</span>
             <input
               type="text"
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Type your username here"
               className="input w-full font-lato font-semibold
               outline-none rounded-lg border-none
@@ -27,6 +38,7 @@ export default function Login() {
             <span className="text-xl label-text font-poppins">Password</span>
             <input
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Type your password here"
               className="input w-full font-lato font-semibold
               outline-none rounded-lg border-none
@@ -35,18 +47,25 @@ export default function Login() {
           </div>
 
           <div className="pt-8">
-            <button className="btn  btn-outline btn-primary font-poppins text-xl w-full duration-500 ">
-              Login
+            <button
+              disabled={loading}
+              className="btn  btn-outline btn-primary font-poppins text-xl w-full duration-500 "
+            >
+              {loading ? (
+                <span className="loading loading-spinner"></span>
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
           <div className="pt-4 font-poppins text-sm flex justify-center items-center">
             <span>Don't have an account ? </span>
-            <a
-              href="#"
+            <Link
+              to={"/signup"}
               className="pl-2 text-sm hover:opacity-80 underline text-blue-400 duration-100 "
             >
               Sign Up{" "}
-            </a>
+            </Link>
           </div>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function GenderCheckBox() {
+export default function GenderCheckBox({ onCheckBox }) {
   const [checked, setChecked] = useState(null);
   const checkMale = () => {
     setChecked("male");
@@ -18,6 +18,7 @@ export default function GenderCheckBox() {
             className="checkbox checkbox-primary border-gray-400"
             onClick={checkMale}
             checked={checked === "male" ? true : false}
+            onChange={() => onCheckBox("male")}
           />
         </label>
       </div>
@@ -28,6 +29,7 @@ export default function GenderCheckBox() {
             type="checkbox"
             className="checkbox checkbox-secondary border-gray-400"
             onClick={checkFemale}
+            onChange={() => onCheckBox("female")}
             checked={checked === "female" ? true : false}
           />
         </label>

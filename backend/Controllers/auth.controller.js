@@ -8,7 +8,7 @@ export const login = async (req,res) =>{
         const user = await User.findOne({username});
         const isPasswordCorrect = await  bcrypt.compare(password, user?.password || "");
         if(!user ){
-            return res.status(400).json({error:"User not found"});
+            return res.status(400).json({error:"User not found, sign up first please"});
         }
         if(!user || !isPasswordCorrect){
             return res.status(400).json({error:"Username or password incorrect"});
