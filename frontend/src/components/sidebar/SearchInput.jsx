@@ -33,7 +33,7 @@ export default function SearchInput() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button className="btn btn-circle  bg-blue-400 text-black border-none hover:bg-blue-500 duration-300">
+      <button className="btn btn-circle ab  bg-blue-400 text-black border-none hover:bg-blue-500 duration-300">
         <IoIosSearch size={22} />
       </button>
     </form>

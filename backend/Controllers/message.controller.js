@@ -1,5 +1,6 @@
 import Conversation from '../Models/conversation.model.js';
 import Message from '../Models/messages.model.js';
+import { getReceiverSocketId, io } from '../socketio/socket.js';
 
 export const sendMessage = async (req, res) => {
 try {
@@ -26,6 +27,13 @@ let  conversation =   await Conversation.findOne({
         conversation.messages.push(newMessage._id);
     }
    await Promise.all([conversation.save(),newMessage.save()])
+
+   //socker io real time messages
+   const receiverSocketId = getReceiverSocketId(receiverId);
+   if(receiverSocketId){
+    //this method is called to send real time message to specific client
+    io.to( receiverSocketId).emit("newMessage",newMessage);
+   }
     res.status(201).json(newMessage);
 } catch (error) {
     console.log("Error while sending message", error.message);
