@@ -2,11 +2,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 //importing routes
 import authRoutes from './Routes/auth.routes.js';
 import messageRoutes  from './Routes/message.routes.js';
 import usersRoutes from './Routes/user.routes.js';
-import path from 'path';
+
 //importing functions
 import connectToMongoDb from './DB/connectToMongoDb.js';
 import { server , app} from './socketio/socket.js';
@@ -33,6 +34,11 @@ app.use('/api/users',usersRoutes);
 
 //middleware to serve static files
 
+app.use(express.static(path.join(__dirname,"/frontend/dist")));
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,"frontend","dist","index.html"));
+})
 
 
 //run express server
