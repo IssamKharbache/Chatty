@@ -28,13 +28,13 @@ export default function SearchInput() {
       <input
         type="text"
         placeholder="Search..."
-        className="input  font-lato outline-none 
+        className="input w-24 md:w-full  font-lato outline-none 
         focus:outline-none  border-2  focus:border-blue-500 font-semibold "
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button className="btn btn-circle ab  bg-blue-400 text-black border-none hover:bg-blue-500 duration-300">
-        <IoIosSearch size={22} />
+      <button className="btn btn-circle size-5 rounded-full md:size-12 text-sm md:text-lg bg-blue-400 text-black border-none hover:bg-blue-500 duration-300">
+        <IoIosSearch />
       </button>
     </form>
   );

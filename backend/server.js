@@ -33,11 +33,7 @@ app.use('/api/users',usersRoutes);
 
 //middleware to serve static files
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-app.get("*",(req,res)=>{
-res.sendFile(path.join(__dirname, "frontend","dist","index.html"))
-})
 
 //run express server
 server.listen(PORT,()=>{
